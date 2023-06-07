@@ -16,6 +16,8 @@ namespace SimpleEntityFramework.Data.Mapping
             builder.Property(e => e.Price).HasColumnName("price");
             builder.Property(e => e.CategoryId).HasColumnName("category_id");
             builder.Property(e => e.CreatedAt).HasColumnName("created_at");
+
+            builder.HasOne(e => e.Category).WithMany().HasForeignKey(e => e.CategoryId);
         }
     }
 }

@@ -16,12 +16,17 @@ namespace SimpleEntityFramework.Data.Repositories
 
         public async Task<List<Product>> GetAll()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products
+                .Include(e => e.Category)
+                .ToListAsync();
         }
 
         public async Task<Product> GetById(int id)
         {
-            return await _context.Products.Where(e => e.Id == id).FirstOrDefaultAsync();
+            return await _context.Products
+                .Include(e => e.Category)
+                .Where(e => e.Id == id)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<Product> Update(Product product, int id)
