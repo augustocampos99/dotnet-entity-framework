@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SimpleEntityFramework.Data.Repositories.Interfaces;
+using SimpleEntityFramework.Dtos;
 using SimpleEntityFramework.Entities;
 
 namespace SimpleEntityFramework.Controllers
@@ -35,16 +36,32 @@ namespace SimpleEntityFramework.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Product product)
+        public async Task<IActionResult> Create(ProductRequestDto productDto)
         {
+            var product = new Product()
+            {
+                Name = productDto.Name,
+                Price = productDto.Price,
+                Quantity = productDto.Quantity,
+                CategoryId = productDto.CategoryId
+            };
+
             var result = await _productRepository.Create(product);
 
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Create(int id, Product product)
+        public async Task<IActionResult> Create(int id, ProductRequestDto productDto)
         {
+            var product = new Product()
+            {
+                Name = productDto.Name,
+                Price = productDto.Price,
+                Quantity = productDto.Quantity,
+                CategoryId = productDto.CategoryId
+            };
+
             var result = await _productRepository.Update(product, id);
 
             return Ok(result);

@@ -32,8 +32,14 @@ namespace SimpleEntityFramework.Data.Repositories
         public async Task<Product> Update(Product product, int id)
         {
             var productResult = _context.Products.Where(e => e.Id == id).FirstOrDefault();
+
+            if (productResult == null)
+                return null;
+
             productResult.Name = product.Name;
             productResult.Price = product.Price;
+            productResult.Quantity = product.Quantity;
+            productResult.CategoryId = product.CategoryId;
 
             _context.Products.Update(productResult);
 
@@ -44,22 +50,21 @@ namespace SimpleEntityFramework.Data.Repositories
 
         public async Task<Product> Create(Product product)
         {
-            var productResult = new Product()
-            {
-                Name = product.Name,
-                Price = product.Price,
-                CreatedAt = DateTime.Now
-            };
+            product.CreatedAt = DateTime.Now;
 
-            _context.Products.Add(productResult);
+            _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return productResult;
+            return product;
         }
 
         public async Task<int> Delete(int id)
         {
             var productResult = _context.Products.Where(e => e.Id == id).FirstOrDefault();
+
+            if (productResult == null)
+                return 0;
+
             _context.Products.Remove(productResult);
             return await _context.SaveChangesAsync();
         }
