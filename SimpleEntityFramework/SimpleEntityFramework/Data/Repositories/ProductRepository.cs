@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
 using SimpleEntityFramework.Data.Context;
 using SimpleEntityFramework.Data.Repositories.Interfaces;
 using SimpleEntityFramework.Entities;
@@ -67,6 +68,30 @@ namespace SimpleEntityFramework.Data.Repositories
 
             _context.Products.Remove(productResult);
             return await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Product>> GetAllRawQuery()
+        {
+            return await _context.Products.FromSqlRaw("SELECT * FROM products ORDER BY id DESC").ToListAsync<Product>();
+        }
+
+        public async Task<Product> GetByIdRawQuery(int id)
+        {
+            return await _context.Products.FromSqlRaw("SELECT * FROM products WHERE id = @Id", new MySqlParameter("Id", id)).FirstOrDefaultAsync<Product>();
+        }
+
+        public async Task<List<Product>> GetAllLinqQuery()
+        {
+            return await (from p in _context.Products 
+                          orderby p.Id descending 
+                          select p).ToListAsync<Product>();
+        }
+
+        public async Task<Product> GetByIdLinqQuery(int id)
+        {
+            return await (from p in _context.Products 
+                          where p.Id == id 
+                          select p).FirstOrDefaultAsync<Product>();
         }
 
     }

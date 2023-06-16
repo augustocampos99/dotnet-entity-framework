@@ -75,5 +75,43 @@ namespace SimpleEntityFramework.Controllers
             return Ok(result);
         }
 
+        [HttpGet("query")]
+        public async Task<IActionResult> GetAllRawQuery()
+        {
+            var result = await _productRepository.GetAllRawQuery();
+
+            return Ok(result);
+        }
+
+        [HttpGet("{id}/query")]
+        public async Task<IActionResult> GetByIdRawQuery(int id)
+        {
+            var result = await _productRepository.GetByIdRawQuery(id);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+
+        [HttpGet("linq")]
+        public async Task<IActionResult> GetAllLinqQuery()
+        {
+            var result = await _productRepository.GetAllLinqQuery();
+
+            return Ok(result);
+        }
+
+        [HttpGet("{id}/linq")]
+        public async Task<IActionResult> GetByIdLinqQuery(int id)
+        {
+            var result = await _productRepository.GetByIdLinqQuery(id);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+
     }
 }

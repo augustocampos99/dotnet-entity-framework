@@ -9,5 +9,9 @@ namespace SimpleEntityFramework.Data.Repositories.Interfaces
         Task<Product> Create(Product product);
         Task<Product> Update(Product product, int id);
         Task<int> Delete(int id);
+        Task<List<Product>> GetAllRawQuery();
+        Task<Product> GetByIdRawQuery(int id);
+        Task<List<Product>> GetAllLinqQuery();
+        Task<Product> GetByIdLinqQuery(int id);
     }
 }

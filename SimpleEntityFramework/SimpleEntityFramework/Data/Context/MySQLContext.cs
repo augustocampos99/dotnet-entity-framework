@@ -23,7 +23,7 @@ namespace SimpleEntityFramework.Data.Context
         }
 
         public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Items { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
     }
 
