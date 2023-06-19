@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Jun-2023 às 16:49
+-- Tempo de geração: 19-Jun-2023 às 23:11
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -63,7 +63,10 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `price`, `quantity`, `category_id`, `created_at`) VALUES
 (1, 'Nintendo Switch 32GB 1 Par Joy-con + Mario Kart 8', '2279.99', 100, 1, '2023-06-07 16:33:33'),
-(2, 'Console Xbox Series S 500Gb Ssd Branco', '2049.90', 50, 1, '2023-06-07 16:33:33');
+(2, 'Console Xbox Series S 500Gb Ssd Branco', '2049.90', 50, 1, '2023-06-07 16:33:33'),
+(7, 'Teste de cadastro update', '0.00', 199, 2, '2023-06-16 17:31:24'),
+(8, 'Teste de cadastro update', '999.99', 0, 2, '2023-06-16 17:31:35'),
+(11, 'Console Playstation 5 Físico 825GB + Jogo God Of War: Ragnarok - SONY', '4199.99', 99, 1, '2023-06-16 17:32:37');
 
 --
 -- Índices para tabelas despejadas
@@ -96,7 +99,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de tabela `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restrições para despejos de tabelas
