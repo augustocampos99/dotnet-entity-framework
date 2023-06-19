@@ -83,15 +83,36 @@ namespace SimpleEntityFramework.Data.Repositories
         public async Task<List<Product>> GetAllLinqQuery()
         {
             return await (from p in _context.Products 
-                          orderby p.Id descending 
-                          select p).ToListAsync<Product>();
+                          join c in _context.Categories
+                          on p.CategoryId equals c.Id
+                          select new Product()
+                          {
+                              Id = p.Id,
+                              Name = p.Name,
+                              Price = p.Price,
+                              Quantity = p.Quantity,
+                              CreatedAt = p.CreatedAt,
+                              CategoryId = p.CategoryId,
+                              Category = c
+                          }).ToListAsync<Product>();
         }
 
         public async Task<Product> GetByIdLinqQuery(int id)
         {
-            return await (from p in _context.Products 
-                          where p.Id == id 
-                          select p).FirstOrDefaultAsync<Product>();
+            return await (from p in _context.Products
+                          join c in _context.Categories
+                          on p.CategoryId equals c.Id
+                          where p.Id == id
+                          select new Product()
+                          {
+                              Id = p.Id,
+                              Name = p.Name,
+                              Price = p.Price,
+                              Quantity = p.Quantity,
+                              CreatedAt = p.CreatedAt,
+                              CategoryId = p.CategoryId,
+                              Category = c
+                          }).FirstOrDefaultAsync<Product>();
         }
 
     }
