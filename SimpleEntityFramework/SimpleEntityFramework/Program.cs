@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// DI Service
+// DI Repository
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 // DI Context
